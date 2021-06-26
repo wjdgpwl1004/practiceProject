@@ -1,10 +1,11 @@
 import React, { useCallback, useEffect, useState, useMemo } from 'react';
-import { Button, Input } from "antd";
+import { Button } from "antd";
 import styled from "styled-components";
 import useInput from "../hooks/useInput";
 import { useDispatch, useSelector } from "react-redux";
 import Router from 'next/router';
 import { actions } from '../actions/AuthAction';
+import AuthInput from "./common/AuthInput";
 
 const ButtonWrapper = styled.div`
   margin-top: 10px;
@@ -73,19 +74,10 @@ const PasswordChange = () => {
     return (
         <>
             <FormWrapper>
-                <div>
-                    <label htmlFor="auth-code">비밀번호</label>
-                    <br />
-                    <Input name="auth-code" type="text" value={password} onChange={onChangePassword} required />
-                </div>
+                <AuthInput text={"비밀번호"} type={"text"} value={password} onChange={onChangePassword}/>
                 {hasPasswordNumberOrSymbolError ? (<ErrorMessage>비밀번호는 숫자나 특수기호를 포함해야 합니다.</ErrorMessage>) : null}
-                <div>
-                    <label htmlFor="auth-code">비밀번호 확인</label>
-                    <br />
-                    <Input name="auth-code" type="text" value={confirmPassword} onChange={onChangeConfirmPassword} required />
-                </div>
+                <AuthInput text={"비밀번호 확인"} type={"text"} value={confirmPassword} onChange={onChangeConfirmPassword} errorMessage={passwordChangeError}/>
                 {passwordConfirmError ? (<ErrorMessage>비밀번호를 확인해 주세요.</ErrorMessage>) : null}
-                {passwordChangeError ? (<ErrorMessage>{passwordChangeError}</ErrorMessage>) : null}
                 <ButtonWrapper>
                     <Button type="primary" onClick={onSubmitForm}>비밀번호 변경</Button>
                 </ButtonWrapper>

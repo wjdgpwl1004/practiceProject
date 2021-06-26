@@ -1,10 +1,10 @@
-import React, {useEffect, useCallback, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import numeral from 'numeral';
 
 const CounterText = styled.div`
   margin-top: 10px;
-  color: red;
+  color: #8b0000;
 `;
 
 const Timer = ({ countDown }) => {

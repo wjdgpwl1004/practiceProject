@@ -1,19 +1,15 @@
 import React, { useEffect, useCallback } from 'react';
-import { Button, Input } from "antd";
+import { Button } from "antd";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import Router from 'next/router';
 import Timer from "../components/Timer";
 import useInput from "../hooks/useInput";
 import { actions } from '../actions/AuthAction';
+import AuthInput from "./common/AuthInput";
 
 const ButtonWrapper = styled.div`
   margin-top: 10px;
-`;
-
-const ErrorMessage = styled.div`
-  margin-top: 10px;
-  color: red;
 `;
 
 const FormWrapper = styled.div`
@@ -56,17 +52,11 @@ const AuthCodeVerification = () => {
     return (
         <>
             <FormWrapper>
-                <div>
-                    <label htmlFor="auth-code">인증 코드</label>
-                    <br />
-                    <Input name="auth-code" type="text" value={authCode} onChange={onChangeAuthCode} required />
-                </div>
+                <AuthInput text={"인증 코드"} type={"text"} value={authCode} onChange={onChangeAuthCode} errorMessage={authCodeVerificationError}/>
                 <Timer countDown={remainMilisecond}/>
-                {authCodeVerificationError ? (<ErrorMessage>{authCodeVerificationError}</ErrorMessage>) : null}
                 <ButtonWrapper>
                     <Button type="primary" onClick={onClickNext}>다음</Button>
                 </ButtonWrapper>
-
             </FormWrapper>
         </>
     );
