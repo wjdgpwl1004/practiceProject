@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import Router from 'next/router';
 import styled from 'styled-components';
 import AppLayout from "../components/AppLayout";
@@ -6,6 +6,7 @@ import { Form, Input, Button } from 'antd';
 import { useDispatch, useSelector } from "react-redux";
 import useInput from "../hooks/useInput";
 import { AUTH_CODE_REQUEST } from "../reducers/auth";
+import Link from "next/link";
 
 const ButtonWrapper = styled.div`
   margin-top: 10px;
@@ -16,7 +17,7 @@ const ErrorMessage = styled.div`
   color: red;
 `;
 
-const FormWrapper = styled(Form)`
+const FormWrapper = styled.div`
   padding: 10px;
 `;
 
@@ -25,18 +26,19 @@ const Home = () => {
     const { authCodeError } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
 
-    const onSubmitForm = useCallback(() => {
+    const onClickNext = useCallback(() => {
         dispatch({
             type: AUTH_CODE_REQUEST,
             data: email,
         });
     }, [email]);
 
+
   return (
       <>
           <AppLayout>
             <div>
-                <FormWrapper onFinish={onSubmitForm}>
+                <FormWrapper>
                     <div>
                         <label htmlFor="user-email">이메일</label>
                         <br />
@@ -44,7 +46,7 @@ const Home = () => {
                     </div>
                     {authCodeError ? (<ErrorMessage>{authCodeError}</ErrorMessage>) : null}
                     <ButtonWrapper>
-                        <Button type="primary" htmlType="submit">다음</Button>
+                        <Button type="primary" onClick={onClickNext}>다음</Button>
                     </ButtonWrapper>
                 </FormWrapper>
             </div>
