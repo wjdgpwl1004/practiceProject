@@ -54,7 +54,7 @@ function* authCodeVerification(action) {
         });
     }
 }
-
+// 비밀번호 변경
 function passwordChangeAPI(data) {
     return axios.patch('/api/reset-password', data);
 }
