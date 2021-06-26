@@ -1,13 +1,13 @@
 import { all, fork } from 'redux-saga/effects';
 import axios from 'axios';
 
-import userSaga from './user';
+import authSaga from './auth';
 
-// axios.defaults.baseURL = 'http://localhost:3065';
-// axios.defaults.withCredentials = true;
+axios.defaults.baseURL = 'https://ably-frontend-interview-server.vercel.app';
+axios.defaults.headers.common['content-type'] = 'application/json';
 
 export default function* rootSaga() {
-    // yield all([
-    //     fork(userSaga),
-    // ]);
+    yield all([
+        fork(authSaga),
+    ]);
 }
