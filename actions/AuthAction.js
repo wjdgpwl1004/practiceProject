@@ -33,7 +33,7 @@ const authCodeVerify = (email, authCode, issueToken) => {
     };
 };
 
-const authCpdeRequest = (email) => {
+const authCodeRequest = (email) => {
     return {
         type: AUTH_CODE_REQUEST,
         data: email,
@@ -43,5 +43,5 @@ const authCpdeRequest = (email) => {
 export const actions = {
     passwordChange,
     authCodeVerify,
-    authCpdeRequest,
+    authCodeRequest,
 };

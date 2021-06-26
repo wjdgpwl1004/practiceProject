@@ -26,7 +26,7 @@ const Home = () => {
 
     const onClickNext = useCallback(() => {
         dispatch(
-            actions.authCpdeRequest(
+            actions.authCodeRequest(
                 email,
             )
         );
