@@ -1,4 +1,15 @@
 import produce from 'immer';
+import {
+    AUTH_CODE_FAILURE,
+    AUTH_CODE_REQUEST,
+    AUTH_CODE_SUCCESS,
+    AUTH_CODE_VERIFICATION_FAILURE,
+    AUTH_CODE_VERIFICATION_REQUEST,
+    AUTH_CODE_VERIFICATION_SUCCESS,
+    PASSWORD_CHANGE_FAILURE,
+    PASSWORD_CHANGE_REQUEST,
+    PASSWORD_CHANGE_SUCCESS
+} from "../actions/AuthAction";
 
 export const initialState = {
     authCodePending: false,
@@ -8,15 +19,8 @@ export const initialState = {
     remainMilisecond: null,
     authCodeVerificationError: null,
     authCodeConfirmToken: null,
+    passwordChangeError: null,
 };
-
-export const AUTH_CODE_REQUEST = 'AUTH_CODE_REQUEST';
-export const AUTH_CODE_SUCCESS = 'AUTH_CODE_SUCCESS';
-export const AUTH_CODE_FAILURE = 'AUTH_CODE_FAILURE';
-
-export const AUTH_CODE_VERIFICATION_REQUEST = 'AUTH_CODE_VERIFICATION_REQUEST';
-export const AUTH_CODE_VERIFICATION_SUCCESS = 'AUTH_CODE_VERIFICATION_SUCCESS';
-export const AUTH_CODE_VERIFICATION_FAILURE = 'AUTH_CODE_VERIFICATION_FAILURE';
 
 const reducer = (state = initialState, action) => produce(state, (draft) => {
     switch (action.type) {
@@ -26,21 +30,25 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
             draft.userEmail = action.data;
             draft.issueToken = null;
             draft.remainMilisecond = null;
+            draft.authCodeConfirmToken = null;
             break;
         case AUTH_CODE_SUCCESS:
             draft.authCodePending = false;
             draft.authCodeError = null;
             draft.issueToken = action.data.issueToken;
             draft.remainMilisecond = action.data.remainMillisecond;
+            draft.authCodeConfirmToken = null;
             break;
         case AUTH_CODE_FAILURE:
             draft.authCodePending = false;
             draft.authCodeError = action.error;
             draft.issueToken = null;
             draft.remainMilisecond = null;
+            draft.authCodeConfirmToken = null;
             break;
         case AUTH_CODE_VERIFICATION_REQUEST:
             draft.authCodeVerificationError = null;
+            draft.authCodeConfirmToken = null;
             break;
         case AUTH_CODE_VERIFICATION_SUCCESS:
             draft.authCodeVerificationError = null;
@@ -48,7 +56,14 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
             break;
         case AUTH_CODE_VERIFICATION_FAILURE:
             draft.authCodeVerificationError = action.error;
+            draft.authCodeConfirmToken = null;
             break;
+        case PASSWORD_CHANGE_REQUEST:
+            draft.passwordChangeError = null;
+        case PASSWORD_CHANGE_SUCCESS:
+            draft.passwordChangeError = null;
+        case PASSWORD_CHANGE_FAILURE:
+            draft.passwordChangeError = action.error;
         default:
             break;
     }
