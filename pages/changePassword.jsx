@@ -1,11 +1,11 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, { useCallback, useEffect, useState, useMemo } from 'react';
 import AppLayout from "../components/AppLayout";
-import {Button, Input} from "antd";
+import { Button, Input } from "antd";
 import styled from "styled-components";
 import useInput from "../hooks/useInput";
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Router from 'next/router';
-import {actions} from '../actions/AuthAction';
+import { actions } from '../actions/AuthAction';
 
 const ButtonWrapper = styled.div`
   margin-top: 10px;
@@ -24,6 +24,7 @@ const ChangePassword = () => {
     const [password, onChangePassword] = useInput('');
     const [confirmPassword, onChangeConfirmPassword] = useInput('');
     const [passwordConfirmError, onChangePasswordConfirmError] = useState(false);
+    const [hasPasswordNumberOrSymbolError, onChangeHasPasswordNumberOrSymbolError] = useState(false);
     const dispatch = useDispatch();
 
     const {
@@ -39,7 +40,20 @@ const ChangePassword = () => {
         }
     }, [authCodeConfirmToken]);
 
+    //* 비밀번호가 숫자나 특수기호를 포함하는지
+    const isPasswordHasNumberOrSymbol = useMemo(
+        () =>
+            !(
+                /[{}[\]/?.,;:|)*~`!^\-_+<>@#$%&\\=('"]/g.test(password) ||
+                /[0-9]/g.test(password)
+            ), [password]);
+
+
     const onSubmitForm = useCallback(() => {
+        console.log(isPasswordHasNumberOrSymbol);
+        if(isPasswordHasNumberOrSymbol) {
+            return onChangeHasPasswordNumberOrSymbolError(true);
+        }
         if (password !== confirmPassword) {
             return onChangePasswordConfirmError(true);
         }
@@ -66,7 +80,7 @@ const ChangePassword = () => {
                         <br />
                         <Input name="auth-code" type="text" value={password} onChange={onChangePassword} required />
                     </div>
-                    {/*{authCodeVerificationError ? (<ErrorMessage>{authCodeVerificationError}</ErrorMessage>) : null}*/}
+                    {hasPasswordNumberOrSymbolError ? (<ErrorMessage>비밀번호는 숫자나 특수기호를 포함해야 합니다.</ErrorMessage>) : null}
                     <div>
                         <label htmlFor="auth-code">비밀번호 확인</label>
                         <br />

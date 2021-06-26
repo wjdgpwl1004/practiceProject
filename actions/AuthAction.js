@@ -22,6 +22,26 @@ const passwordChange = (email, confirmToken, newPassword, newPasswordConfirm) =>
     };
 };
 
+const authCodeVerify = (email, authCode, issueToken) => {
+    return {
+        type: AUTH_CODE_VERIFICATION_REQUEST,
+        data: {
+            email,
+            authCode,
+            issueToken,
+        },
+    };
+};
+
+const authCpdeRequest = (email) => {
+    return {
+        type: AUTH_CODE_REQUEST,
+        data: email,
+    };
+};
+
 export const actions = {
-    passwordChange
+    passwordChange,
+    authCodeVerify,
+    authCpdeRequest,
 };

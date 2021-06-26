@@ -1,12 +1,12 @@
 import React, { useEffect, useCallback } from 'react';
 import AppLayout from "../components/AppLayout";
-import {Button, Form, Input} from "antd";
+import { Button, Input } from "antd";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import Router from 'next/router';
 import Timer from "../components/Timer";
-import { AUTH_CODE_VERIFICATION_REQUEST } from "../reducers/auth";
 import useInput from "../hooks/useInput";
+import { actions } from '../actions/AuthAction';
 
 const ButtonWrapper = styled.div`
   margin-top: 10px;
@@ -44,15 +44,13 @@ const Verification = () => {
     }
 
     const onClickNext = useCallback(() => {
-        console.log('authCode = ', authCode);
-        dispatch({
-            type: AUTH_CODE_VERIFICATION_REQUEST,
-            data: {
-                email: userEmail,
+        dispatch(
+            actions.authCodeVerify(
+                userEmail,
                 authCode,
                 issueToken,
-            },
-        });
+            )
+        );
     }, [userEmail, authCode, issueToken]);
 
 

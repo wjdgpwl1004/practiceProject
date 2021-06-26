@@ -1,12 +1,10 @@
-import React, { useCallback, useEffect } from 'react';
-import Router from 'next/router';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import AppLayout from "../components/AppLayout";
-import { Form, Input, Button } from 'antd';
+import { Input, Button } from 'antd';
 import { useDispatch, useSelector } from "react-redux";
 import useInput from "../hooks/useInput";
-import { AUTH_CODE_REQUEST } from "../reducers/auth";
-import Link from "next/link";
+import { actions } from '../actions/AuthAction';
 
 const ButtonWrapper = styled.div`
   margin-top: 10px;
@@ -27,10 +25,11 @@ const Home = () => {
     const dispatch = useDispatch();
 
     const onClickNext = useCallback(() => {
-        dispatch({
-            type: AUTH_CODE_REQUEST,
-            data: email,
-        });
+        dispatch(
+            actions.authCpdeRequest(
+                email,
+            )
+        );
     }, [email]);
 
 

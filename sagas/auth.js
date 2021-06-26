@@ -1,4 +1,4 @@
-import {all, call, fork, put, takeLatest} from 'redux-saga/effects';
+import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 import {
     AUTH_CODE_FAILURE,
@@ -27,7 +27,6 @@ function* authCodeIssuance(action) {
         });
         Router.push('/verification');
     } catch (err) {
-        console.log(err);
         yield put({
             type: AUTH_CODE_FAILURE,
             error: err.response.data.error.message,
@@ -67,7 +66,7 @@ function* passwordChange(action) {
             type: PASSWORD_CHANGE_SUCCESS,
             data
         });
-        alert('성공했다. 두둥탁');
+        alert('성공했습니다.');
         Router.push('/');
     } catch (err) {
         yield put({
