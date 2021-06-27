@@ -9,6 +9,7 @@ const globalStyle = css`
   body {
     font-family: Noto Sans, Noto Sans KR;
     line-height: 1.2;
+    overflow-x: hidden;
   }
   a {
     text-decoration: none;
