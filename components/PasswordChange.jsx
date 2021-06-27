@@ -50,7 +50,6 @@ const PasswordChange = () => {
 
 
     const onSubmitForm = useCallback(() => {
-        console.log(isPasswordHasNumberOrSymbol);
         if(isPasswordHasNumberOrSymbol) {
             return onChangeHasPasswordNumberOrSymbolError(true);
         }

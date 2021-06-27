@@ -88,7 +88,7 @@ function* watchPasswordChange() {
     yield takeLatest(PASSWORD_CHANGE_REQUEST, passwordChange);
 }
 
-export default function* userSaga() {
+export default function* authSaga() {
     yield all([
         fork(watchAuthCodeIssuance),
         fork(watchAuthCodeVerification),

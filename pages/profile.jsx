@@ -1,17 +1,19 @@
 import React from 'react';
-import AppLayout from "../components/AppLayout";
-import wrapper from '../store/configureStore';
-import { END } from 'redux-saga';
-import { actions } from '../actions/UserAction';
-import axios from 'axios';
+import MyPage from "../components/MyPage";
+import wrapper from "../store/configureStore";
+import axios from "axios";
+import {actions} from "../actions/UserAction";
+import {END} from "redux-saga";
 
-const Home = () => {
 
-  return (
-      <>
-            메인 화면 입니다.
-      </>
-  );
+
+const Profile = () => {
+
+    return (
+        <>
+            <MyPage/>
+        </>
+    );
 };
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ req, res, ...etc }) => {
@@ -26,4 +28,4 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async ({
     await store.sagaTask.toPromise();
 });
 
-export default Home;
+export default Profile;

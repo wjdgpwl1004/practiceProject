@@ -1,11 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
 import { Menu, Row, Col } from 'antd';
-import styled from 'styled-components';
-import Router from 'next/router';
+import LoginForm from "./LoginForm";
+import { useSelector } from "react-redux";
+import UserProfile from "./UserProfile";
 
 const AppLayout = ({ children }) => {
-
+    const { email } = useSelector((state) => state.user);
     return (
         <div>
             <Menu mode="horizontal">
@@ -15,7 +16,7 @@ const AppLayout = ({ children }) => {
             </Menu>
             <Row gutter={8}>
                 <Col xs={24} md={8}>
-                    login
+                    {email ? <UserProfile/> : <LoginForm/>}
                 </Col>
                 <Col xs={24} md={16}>
                     {children}
