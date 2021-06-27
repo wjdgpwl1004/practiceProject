@@ -2,8 +2,8 @@ import React from 'react';
 import MyPage from "../components/MyPage";
 import wrapper from "../store/configureStore";
 import axios from "axios";
-import {actions} from "../actions/UserAction";
-import {END} from "redux-saga";
+import { actions } from "../actions/UserAction";
+import { END } from "redux-saga";
 
 
 

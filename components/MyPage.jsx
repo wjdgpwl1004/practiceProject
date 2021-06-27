@@ -4,7 +4,6 @@ import { Button, Card } from "antd";
 import Router from 'next/router';
 import { useDispatch, useSelector } from "react-redux";
 import { actions } from "../actions/UserAction";
-import {END} from "redux-saga";
 
 const MyPageWrapper = styled.div`
   padding: 10px;

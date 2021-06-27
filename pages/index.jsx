@@ -1,5 +1,4 @@
 import React from 'react';
-import AppLayout from "../components/AppLayout";
 import wrapper from '../store/configureStore';
 import { END } from 'redux-saga';
 import { actions } from '../actions/UserAction';
