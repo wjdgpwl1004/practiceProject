@@ -13,6 +13,9 @@ const AppLayout = ({ children }) => {
                 <Menu.Item key="home">
                     <Link href="/"><a>Home</a></Link>
                 </Menu.Item>
+                {email ? (<Menu.Item key="profile">
+                    <Link href="/profile"><a>프로필</a></Link>
+                </Menu.Item>) : null}
             </Menu>
             <Row gutter={8}>
                 <Col xs={24} md={8}>
