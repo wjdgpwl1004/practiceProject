@@ -12,10 +12,11 @@ import {
     PASSWORD_CHANGE_SUCCESS,
 } from '../actions/AuthAction';
 import Router from 'next/router';
+import { AuthCodeIssuanceResponse, AuthCodeVerificationResponse } from "./types";
 
 // 인증 코드 발급 요청
 function authCodeIssuanceAPI(data) {
-    return axios.get(`/api/reset-password?email=${data}`);
+    return axios.get<{ data: AuthCodeIssuanceResponse }>(`/api/reset-password?email=${data}`);
 }
 
 function* authCodeIssuance(action) {
@@ -36,7 +37,7 @@ function* authCodeIssuance(action) {
 
 // 인증코드 검증
 function authCodeVerificationAPI(data) {
-    return axios.post('/api/reset-password', data);
+    return axios.post<{ data: AuthCodeVerificationResponse }>('/api/reset-password', data);
 }
 
 function* authCodeVerification(action) {

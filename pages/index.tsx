@@ -20,7 +20,7 @@ export const getServerSideProps = wrapper.getServerSideProps((store): any => asy
     } else {
         axios.defaults.headers['Authorization'] = null;
     }
-    store.dispatch(actions.getInfoRequest());
+    store.dispatch(actions.getUserInfoRequest());
     store.dispatch(END);
     await (store as any).sagaTask.toPromise();
 });

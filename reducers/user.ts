@@ -3,9 +3,9 @@ import {
     LOG_IN_REQUEST,
     LOG_IN_SUCCESS,
     LOG_IN_FAILURE,
-    GET_INFO_REQUEST,
-    GET_INFO_SUCCESS,
-    GET_INFO_FAILURE,
+    GET_USER_INFO_REQUEST,
+    GET_USER_INFO_SUCCESS,
+    GET_USER_INFO_FAILURE,
     LOG_OUT_REQUEST,
     LOG_OUT_SUCCESS,
     LOG_OUT_FAILURE
@@ -17,7 +17,7 @@ type UserState = {
     name: null | string,
     email: null | string,
     profileImage: null | string,
-    getInfoError: null | string,
+    getUserInfoError: null | string,
     logOutError: null | string,
 };
 
@@ -27,7 +27,7 @@ export const initialState: UserState = {
     name: null,
     email: null,
     profileImage: null,
-    getInfoError: null,
+    getUserInfoError: null,
     logOutError: null,
 };
 
@@ -43,17 +43,17 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
         case LOG_IN_FAILURE:
             draft.loginError = action.error;
             break;
-        case GET_INFO_REQUEST:
-            draft.getInfoError = null;
+        case GET_USER_INFO_REQUEST:
+            draft.getUserInfoError = null;
             break;
-        case GET_INFO_SUCCESS:
-            draft.getInfoError = null;
+        case GET_USER_INFO_SUCCESS:
+            draft.getUserInfoError = null;
             draft.name = action.data.name;
             draft.email = action.data.email;
             draft.profileImage = action.data.profileImage;
             break;
-        case GET_INFO_FAILURE:
-            draft.getInfoError = action.error;
+        case GET_USER_INFO_FAILURE:
+            draft.getUserInfoError = action.error;
             break;
         case LOG_OUT_REQUEST:
             draft.logOutError = null;

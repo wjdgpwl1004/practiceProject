@@ -4,21 +4,22 @@ import {
     LOG_IN_REQUEST,
     LOG_IN_SUCCESS,
     LOG_IN_FAILURE,
-    GET_INFO_REQUEST,
-    GET_INFO_SUCCESS,
-    GET_INFO_FAILURE,
+    GET_USER_INFO_REQUEST,
+    GET_USER_INFO_SUCCESS,
+    GET_USER_INFO_FAILURE,
     LOG_OUT_REQUEST,
     LOG_OUT_SUCCESS,
     LOG_OUT_FAILURE
 } from "../actions/UserAction";
 import Router from 'next/router';
 import Cookies from 'universal-cookie';
+import { GetUserInfoResponse, LogInResponse, LogOutResponse } from "./types";
 
 const cookies = new Cookies();
 
 // 로그인
 function logInAPI(data) {
-    return axios.post(`/api/login`, data);
+    return axios.post<{ data: LogInResponse }>(`/api/login`, data);
 }
 
 function* logIn(action) {
@@ -39,20 +40,20 @@ function* logIn(action) {
 }
 
 // 회원정보 조회
-function getInfoAPI() {
-    return axios.get(`/api/user`);
+function getUserInfoAPI() {
+    return axios.get<{ data: GetUserInfoResponse }>(`/api/user`);
 }
 
-function* getInfo() {
+function* getUserInfo() {
     try {
-        const { data } = yield call(getInfoAPI);
+        const { data } = yield call(getUserInfoAPI);
         yield put({
-            type: GET_INFO_SUCCESS,
+            type: GET_USER_INFO_SUCCESS,
             data
         });
     } catch (err) {
         yield put({
-            type: GET_INFO_FAILURE,
+            type: GET_USER_INFO_FAILURE,
             error: err.response.data.error.message,
         });
     }
@@ -60,7 +61,7 @@ function* getInfo() {
 
 // 로그아웃
 function logOutAPI() {
-    return axios.post(`/api/logout`, {}, {
+    return axios.post<{ data: LogOutResponse }>(`/api/logout`, {}, {
         headers: {
             Authorization: `Bearer ${getTokenFormCookie()}`
         }
@@ -98,8 +99,8 @@ function* watchLogin() {
     yield takeLatest(LOG_IN_REQUEST, logIn);
 }
 
-function* watchGetInfo() {
-    yield takeLatest(GET_INFO_REQUEST, getInfo);
+function* watchGetUserInfo() {
+    yield takeLatest(GET_USER_INFO_REQUEST, getUserInfo);
 }
 
 function* watchLogOut() {
@@ -109,7 +110,7 @@ function* watchLogOut() {
 export default function* userSaga() {
     yield all([
         fork(watchLogin),
-        fork(watchGetInfo),
+        fork(watchGetUserInfo),
         fork(watchLogOut),
     ]);
 }

@@ -2,9 +2,9 @@ export const LOG_IN_REQUEST = 'LOG_IN_REQUEST';
 export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS';
 export const LOG_IN_FAILURE = 'LOG_IN_FAILURE';
 
-export const GET_INFO_REQUEST = 'GET_INFO_REQUEST';
-export const GET_INFO_SUCCESS = 'GET_INFO_SUCCESS';
-export const GET_INFO_FAILURE = 'GET_INFO_FAILURE';
+export const GET_USER_INFO_REQUEST = 'GET_INFO_REQUEST';
+export const GET_USER_INFO_SUCCESS = 'GET_INFO_SUCCESS';
+export const GET_USER_INFO_FAILURE = 'GET_INFO_FAILURE';
 
 export const LOG_OUT_REQUEST = 'LOG_OUT_REQUEST';
 export const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS';
@@ -20,9 +20,9 @@ const loginRequest = (email, password) => {
     };
 };
 
-const getInfoRequest = () => {
+const getUserInfoRequest = () => {
     return {
-        type: GET_INFO_REQUEST,
+        type: GET_USER_INFO_REQUEST,
     };
 }
 
@@ -34,6 +34,6 @@ const logOutRequest = () => {
 
 export const actions = {
     loginRequest,
-    getInfoRequest,
+    getUserInfoRequest,
     logOutRequest,
 };

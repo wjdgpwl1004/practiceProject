@@ -15,7 +15,7 @@ const ButtonWrapper = styled.div`
 const MyPage = () => {
     const { Meta } = Card;
 
-    const { getInfoError, name, email, profileImage, logOutError } = useSelector((state) => state.user);
+    const { getUserInfoError, name, email, profileImage, logOutError } = useSelector((state) => state.user);
     const dispatch = useDispatch();
     
     useEffect(() => {
@@ -25,10 +25,10 @@ const MyPage = () => {
     }, [email]);
 
     useEffect(() => {
-        if(getInfoError) {
+        if(getUserInfoError) {
             Router.push('/');
         }
-    }, [getInfoError]);
+    }, [getUserInfoError]);
 
     useEffect(() => {
         if(logOutError) {
