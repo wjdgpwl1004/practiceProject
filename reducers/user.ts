@@ -11,7 +11,17 @@ import {
     LOG_OUT_FAILURE
 } from "../actions/UserAction";
 
-export const initialState = {
+type UserState = {
+    loginError: null | string,
+    accessToken: null | string,
+    name: null | string,
+    email: null | string,
+    profileImage: null | string,
+    getInfoError: null | string,
+    logOutError: null | string,
+};
+
+export const initialState: UserState = {
     loginError: null,
     accessToken: null,
     name: null,

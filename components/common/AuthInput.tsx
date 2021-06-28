@@ -11,13 +11,21 @@ const ErrorMessage = styled.div`
   color: red;
 `;
 
+type AuthInputProps = {
+    text: string
+    type: string,
+    value: string | number,
+    onChange: () => void,
+    errorMessage: string | null,
+};
+
 const AuthInput = ({
     text,
     type,
     value,
     onChange,
     errorMessage,
-}) => {
+}: AuthInputProps) => {
 
     return (
         <AuthInputWrapper>

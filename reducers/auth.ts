@@ -11,7 +11,18 @@ import {
     PASSWORD_CHANGE_SUCCESS
 } from "../actions/AuthAction";
 
-export const initialState = {
+type AuthState = {
+    authCodePending: boolean,
+    authCodeError: null | string,
+    userEmail: null | string,
+    issueToken: null | string,
+    remainMilisecond: null | number,
+    authCodeVerificationError: null | string,
+    authCodeConfirmToken: null | string,
+    passwordChangeError: null | string,
+};
+
+export const initialState: AuthState = {
     authCodePending: false,
     authCodeError: null,
     userEmail: null,

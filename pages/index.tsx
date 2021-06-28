@@ -13,7 +13,7 @@ const Home = () => {
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ req, res, ...etc }) => {
+export const getServerSideProps = wrapper.getServerSideProps((store): any => async ({ req, res, ...etc }) => {
     const auth = req ? req.cookies['accessToken'] : '';
     if (req && auth) {
         axios.defaults.headers['Authorization'] = `Bearer ${auth}`;
@@ -22,7 +22,7 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async ({
     }
     store.dispatch(actions.getInfoRequest());
     store.dispatch(END);
-    await store.sagaTask.toPromise();
+    await (store as any).sagaTask.toPromise();
 });
 
 export default Home;

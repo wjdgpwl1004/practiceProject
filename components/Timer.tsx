@@ -6,8 +6,11 @@ const CounterText = styled.div`
   margin-top: 10px;
   color: #8b0000;
 `;
+type TimerProps = {
+    countDown: number
+};
 
-const Timer = ({ countDown }) => {
+const Timer = ({ countDown }: TimerProps) => {
     if (!countDown) {
         return null;
     }

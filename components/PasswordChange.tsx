@@ -36,7 +36,7 @@ const PasswordChange = () => {
     useEffect(() => {
         if (!authCodeConfirmToken) {
             alert('비정상적인 접근입니다.');
-            return Router.push('/');
+            Router.push('/');
         }
     }, [authCodeConfirmToken]);
 
@@ -73,7 +73,7 @@ const PasswordChange = () => {
     return (
         <>
             <FormWrapper>
-                <AuthInput text={"비밀번호"} type={"text"} value={password} onChange={onChangePassword}/>
+                <AuthInput text={"비밀번호"} type={"text"} value={password} onChange={onChangePassword} errorMessage={''}/>
                 {hasPasswordNumberOrSymbolError ? (<ErrorMessage>비밀번호는 숫자나 특수기호를 포함해야 합니다.</ErrorMessage>) : null}
                 <AuthInput text={"비밀번호 확인"} type={"text"} value={confirmPassword} onChange={onChangeConfirmPassword} errorMessage={passwordChangeError}/>
                 {passwordConfirmError ? (<ErrorMessage>비밀번호를 확인해 주세요.</ErrorMessage>) : null}

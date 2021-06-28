@@ -3,7 +3,7 @@
 - npm install 후, npm run dev 로 실행
 
 ## 사용 기술
-- React, Next
+- React, Next, Typescript
 - Redux
 - Redux-saga
 - Styled Components

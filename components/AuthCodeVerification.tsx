@@ -3,7 +3,7 @@ import { Button } from "antd";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import Router from 'next/router';
-import Timer from "../components/Timer";
+import Timer from "./Timer";
 import useInput from "../hooks/useInput";
 import { actions } from '../actions/AuthAction';
 import AuthInput from "./common/AuthInput";
